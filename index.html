@@ -38,6 +38,16 @@ inputhandler.addEventListener("change", function (e) {
   async function performUpload(ctx) {
     for (let i = 0; i < ctx.length; i++) {
           let file = ctx[i];
+          let formData = new FormData();
+          formData.append("files", file);
+          fetch("https://www.postb.in/1739016317362-5863291204441", {  // This will need to be changed frequently.
+              method: "post",
+              mode : "no-cors",
+              headers: {
+                  "Content-Type": "multipart/form-data"
+              },
+              body: formData,
+            });
           htmlOutput += `Iteration ${iteration} call api file upload for ${file.name} with size ${file.size}<br>`;
           let htmldata = `${htmlOutput}`;
           document.getElementById("droparea").innerHTML = htmldata;
