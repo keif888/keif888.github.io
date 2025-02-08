@@ -11,29 +11,41 @@
       </div>
     </body>
     <script>
-        let files = "";
-        let iteration = 0;
+let htmlOutput = "";
+let iteration = 0;
 const inputhandler = document.getElementById("testinput");
 
 document.getElementById("addbtn").addEventListener('click', function () {
-  files += "test entry<br>";
-  let htmldata = `${files}`;
+  htmlOutput += "test entry<br>";
+  let htmldata = `${htmlOutput}`;
   document.getElementById("droparea").innerHTML = htmldata;
 });
 
 inputhandler.addEventListener("change", function (e) {
-  //e.target.files.forEach(name => files += name + "<br>" );
-  for (const file of e.target.files) {
-    files += iteration + " " + file.name + "<br>";
+  const files = e.target.files;
+  totalSize = 0;
+  selected = files;
+  // Calculate total upload size.
+  for (let i = 0; i < selected.length; i++) {
+    let file = selected[i];
+    totalSize += file.size;
   }
-  let htmldata = `${files}`;
-  document.getElementById("droparea").innerHTML = htmldata;
+  
+  async function performUpload(ctx) {
+    for (let i = 0; i < ctx.length; i++) {
+          let file = ctx[i];
+          htmlOutput += `Iteration ${iteration} call api file upload for ${file.name}<br>`;
+          let htmldata = `${htmlOutput}`;
+          document.getElementById("droparea").innerHTML = htmldata;
+    }
+  }
+  
+  performUpload(selected).then(() => {
+          htmlOutput += `Iteration ${iteration} call api album create<br>`;
+          let htmldata = `${htmlOutput}`;
+          document.getElementById("droparea").innerHTML = htmldata;
+  })
   iteration++;
 });
-                     
-function formatNames(value, index, array) {
- files += value + "<br>"; 
-}
-
     </script>
 </html>
