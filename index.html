@@ -31,10 +31,14 @@ inputhandler.addEventListener("change", function (e) {
     totalSize += file.size;
   }
   
+  htmlOutput += `Total File Size ${totalSize}<br>`;
+  let htmldata = `${htmlOutput}`;
+  document.getElementById("droparea").innerHTML = htmldata;
+  
   async function performUpload(ctx) {
     for (let i = 0; i < ctx.length; i++) {
           let file = ctx[i];
-          htmlOutput += `Iteration ${iteration} call api file upload for ${file.name}<br>`;
+          htmlOutput += `Iteration ${iteration} call api file upload for ${file.name} with size ${file.size}<br>`;
           let htmldata = `${htmlOutput}`;
           document.getElementById("droparea").innerHTML = htmldata;
     }
