@@ -1,0 +1,37 @@
+<html>
+    <body>
+    <div>
+        <input id="testinput" type="file"  multiple>
+        <div>
+          <button id="addbtn" class="btn">Add Text</button>
+          <p>Files Selected</p>
+          <p id="droparea">
+          </p>
+        </div>
+      </div>
+    </body>
+    <script>
+        let files = "";
+const inputhandler = document.getElementById("testinput");
+
+document.getElementById("addbtn").addEventListener('click', function () {
+  files += "test entry<br>";
+  let htmldata = `${files}`;
+  document.getElementById("droparea").innerHTML = htmldata;
+});
+
+inputhandler.addEventListener("change", function (e) {
+  //e.target.files.forEach(name => files += name + "<br>" );
+  for (const file of e.target.files) {
+    files += file.name + "<br>";
+  }
+  let htmldata = `${files}`;
+  document.getElementById("droparea").innerHTML = htmldata;
+});
+                     
+function formatNames(value, index, array) {
+ files += value + "<br>"; 
+}
+
+    </script>
+</html>
