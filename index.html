@@ -1,14 +1,16 @@
 <html>
     <body>
-    <div>
-        <input id="testinput" type="file"  multiple>
-        <div>
-          <button id="addbtn" class="btn">Add Text</button>
-          <p>Files Selected</p>
-          <p id="droparea">
-          </p>
-        </div>
-      </div>
+        <form id="testform">
+            <div>
+                <input id="testinput" type="file"  multiple>
+                <div>
+                    <button id="addbtn" class="btn">Add Text</button>
+                    <p>Files Selected</p>
+                    <p id="droparea">
+                    </p>
+                </div>
+            </div>
+      </form>
     </body>
     <script>
 let htmlOutput = "";
@@ -61,5 +63,12 @@ inputhandler.addEventListener("change", function (e) {
   })
   iteration++;
 });
+
+function processForm(e) {
+  if (e.preventDefault) e.preventDefault();
+  return false;
+}
+document.getElementById("testform").addEventListener("submit", processForm);
+
     </script>
 </html>
