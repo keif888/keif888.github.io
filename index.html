@@ -2,7 +2,9 @@
     <body>
         <form id="testform">
             <div>
-                <input id="testinput" type="file"  multiple>
+                <input id="testinput" type="file"  multiple hidden>
+                <label for="postbin">https://postb.in/ URL</label>
+                <input id="postbin" type="text" name="postbin"><br><br>
                 <div>
                     <button id="addbtn" class="btn">Add Text</button>
                     <p>Files Selected</p>
@@ -13,6 +15,7 @@
       </form>
     </body>
     <script>
+let postbinsite = "https://post.in/";
 let htmlOutput = "";
 let iteration = 0;
 const inputhandler = document.getElementById("testinput");
@@ -33,6 +36,8 @@ inputhandler.addEventListener("change", function (e) {
     totalSize += file.size;
   }
   
+  postbinsite = document.getElementById("postbin").value;
+
   htmlOutput += `Total File Size ${totalSize}<br>`;
   let htmldata = `${htmlOutput}`;
   document.getElementById("droparea").innerHTML = htmldata;
@@ -42,7 +47,7 @@ inputhandler.addEventListener("change", function (e) {
           let file = ctx[i];
           let formData = new FormData();
           formData.append("files", file);
-          fetch("https://www.postb.in/1739016317362-5863291204441", {  // This will need to be changed frequently.
+          fetch(postbinsite, {
               method: "post",
               mode : "no-cors",
               headers: {
